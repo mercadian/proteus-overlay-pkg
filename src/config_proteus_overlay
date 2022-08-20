@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Adds the Proteus's STA (User) LED Override to the list of device tree overlays in each kernel boot option
+
+EXTLINUX_CONF="/boot/extlinux/extlinux.conf"
+EXTLINUX_CONF_NEW="${EXTLINUX_CONF}.new"
+PROTEUS_OVERLAY_PATH="/proteus/sta-led-overlay.dtbo"
+OFFSET=0
+
+# Copy the old conf into a new file for editing
+cp $EXTLINUX_CONF $EXTLINUX_CONF_NEW
+
+# Get the line number for each of the kernel entries
+ENTRY_LINES=($(awk '/^label /{print NR}' $EXTLINUX_CONF))
+
+# Add the line count
+LAST_LINE=$(wc -l < $EXTLINUX_CONF)
+ENTRY_LINES+=($LAST_LINE)
+
+# Iterate through each entry
+LENGTH=${#ENTRY_LINES[@]}
+for (( i=0; i<$LENGTH-1; i++ )); do
+    # Get the line numbers for the bounds of the entry
+    START_LINE=${ENTRY_LINES[$i]}
+    END_LINE=$((${ENTRY_LINES[$i+1]}-1))
+
+    # Get the line number of an existing fdtoverlays line
+    EXISTING_LINE_NUMBER=$(awk "/^[[:space:]]*fdtoverlays/ && NR >= $START_LINE && NR <= $END_LINE {print NR}" $EXTLINUX_CONF)
+
+    # Create a line if it doesn't exist
+    if [ "$EXISTING_LINE_NUMBER" = "" ]; then
+        echo "FDT Overlays line doesn't exist in entry $i, creating one..."
+        sed -e "$(($END_LINE+$OFFSET)) i \    fdtoverlays $PROTEUS_OVERLAY_PATH" -i $EXTLINUX_CONF_NEW
+        OFFSET=$(($OFFSET+1))
+    else
+        # Get the existing line
+        EXISTING_LINE=$(awk "NR==$EXISTING_LINE_NUMBER { print }" $EXTLINUX_CONF)
+
+        # Ignore if it's already there, otherwise add it to the existing line
+        if [[ "$EXISTING_LINE" = *"$PROTEUS_OVERLAY_PATH"* ]]; then
+            echo "Entry $i already had the Proteus overlay installed."
+        else
+            echo "Adding Proteus overlay to existing line for entry $i..."
+            awk "NR==$(($EXISTING_LINE_NUMBER+$OFFSET)) {\$0=\"$EXISTING_LINE $PROTEUS_OVERLAY_PATH\"} { print }" $EXTLINUX_CONF_NEW > $EXTLINUX_CONF_NEW.tmp && mv $EXTLINUX_CONF_NEW.tmp $EXTLINUX_CONF_NEW
+        fi  
+    fi 
+done
+
+# Update the conf file and print it
+mv $EXTLINUX_CONF_NEW $EXTLINUX_CONF
+echo "New extlinux config at $EXTLINUX_CONF:"
+cat $EXTLINUX_CONF

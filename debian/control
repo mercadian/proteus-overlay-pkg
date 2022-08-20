@@ -1,0 +1,21 @@
+Source: proteus-overlay
+Section: boot
+Priority: important
+Maintainer: Mercadian Systems <info@mercadian.net>
+Build-Depends: debhelper-compat (= 13),
+               device-tree-compiler
+Standards-Version: 4.5.1
+Vcs-Browser: https://github.com/mercadian/proteus-overlay-pkg
+Vcs-Git: https://github.com/mercadian/proteus-overlay-pkg.git
+
+Package: proteus-overlay
+Architecture: arm64
+Priority: important
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Device tree overlay and config scripts for the Proteus's front panel
+ This package contains the device tree overlay for the Proteus that changes the
+ Rock 5B's default activity LED pin to one of the GPIO pins so it can be used by
+ the activity LED in the front panel.
+ It also installs the kernel hooks that update the bootloader configuration when
+ the kernel is updated, so your Proteus will always have the front panel overlay
+ installed.

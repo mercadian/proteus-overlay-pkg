@@ -1,0 +1,8 @@
+*.deb
+*.dtbo
+.vscode*
+debian/proteus-overlay/
+debian/.debhelper/
+debian/debhelper*
+debian/files
+debian/proteus-overlay.substvars

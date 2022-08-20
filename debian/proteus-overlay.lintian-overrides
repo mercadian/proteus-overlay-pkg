@@ -1,0 +1,2 @@
+proteus-overlay: unknown-section boot
+proteus-overlay: executable-not-elf-or-script boot/proteus/sta-led-overlay.dtbo

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+CONFIG_SCRIPT="/usr/sbin/config_proteus_overlay"
+
+if [[ -f "$CONFIG_SCRIPT" ]]; then
+    exec $CONFIG_SCRIPT
+fi
