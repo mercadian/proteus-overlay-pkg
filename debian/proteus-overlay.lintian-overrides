@@ -1,2 +1,3 @@
 proteus-overlay: unknown-section boot
 proteus-overlay: executable-not-elf-or-script boot/proteus/sta-led-overlay.dtbo
+proteus-overlay: no-manual-page usr/sbin/config_proteus_overlay

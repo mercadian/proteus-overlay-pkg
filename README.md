@@ -9,14 +9,16 @@ It also contains the source for building the Debian package that installs those 
 To run this, you will need the following packages:
 
 ```bash
-sudo apt install device-tree-compiler devscripts
+sudo apt install device-tree-compiler devscripts lintian
 ```
 
 
 ## Building
 
-Simply run `build.sh` to build the files.
+To build the package, run:
 
-The Device Tree Overlay itself will be in `out/sta-led-overlay.dtbo`.
+```
+debuild -b -us -uc -aarm64
+```
 
-The Debian package will be in `out/proteus-overlay-<version>.deb`.
+The output will be in the parent directory of this folder because of the way the Debian builder works.

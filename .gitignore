@@ -6,3 +6,4 @@ debian/.debhelper/
 debian/debhelper*
 debian/files
 debian/proteus-overlay.substvars
+out/
