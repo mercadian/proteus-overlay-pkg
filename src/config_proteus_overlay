@@ -4,7 +4,7 @@
 
 EXTLINUX_CONF="/boot/extlinux/extlinux.conf"
 EXTLINUX_CONF_NEW="${EXTLINUX_CONF}.new"
-PROTEUS_OVERLAY_PATH="/proteus/sta-led-overlay.dtbo"
+PROTEUS_OVERLAY_PATH="/proteus/user-led-overlay.dtbo"
 OFFSET=0
 
 # Copy the old conf into a new file for editing
