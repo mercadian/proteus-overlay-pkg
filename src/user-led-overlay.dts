@@ -5,6 +5,12 @@
 /dts-v1/;
 /plugin/;
 
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/leds/common.h>
+#include <dt-bindings/pwm/pwm.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+#include <dt-bindings/input/rk-input.h>
+
 // Overwrites the GPIO pin used for the User LED and the default trigger.
 / {
 	fragment@0 {
@@ -16,16 +22,16 @@
 				pinctrl-0 = <&led_rgb_b>;
 
 				led_rgb_b {
-					function = "status";
-					color = <1>;
-					gpios = <&gpio3 4 0>; // GPIO3_A4, which is pin 16 (GPIO 100)
+					function = LED_FUNCTION_STATUS;
+					color = <LED_COLOR_ID_RED>;
+					gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_HIGH>; // GPIO3_A4, which is pin 16 (GPIO 100)
 					linux,default-trigger = "activity";
 				};
 
 				disable_old_led {
-					function = "status";
-					color = <1>;
-					gpios = <&gpio0 15 0>; // GPIO3_A4, which is pin 16 (GPIO 100)
+					function = LED_FUNCTION_STATUS;
+					color = <LED_COLOR_ID_BLUE>;
+					gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>; // Inbuilt blue user LED on GPIO0_B7, which is not on the GPIO header
 					linux,default-trigger = "none";
 				};
 			};
@@ -37,11 +43,11 @@
 		__overlay__ {
 			leds {
 				led_rgb_b: led-rgb-b {
-					rockchip,pins = <3 4 0 &pcfg_pull_none>;
+					rockchip,pins = <3 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
 				};
 
 				disable_old_led: disable-old-led {
-					rockchip,pins = <0 15 0 &pcfg_pull_down>;
+					rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_down>;
 				};
 			};
 		};

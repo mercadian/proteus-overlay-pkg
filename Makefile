@@ -1,7 +1,7 @@
 all: proteus-overlay
 
 proteus-overlay:
-	dtc -O dtb -o user-led-overlay.dtbo -@ src/user-led-overlay.dts
+	dtc -O dtb -o user-led-overlay.dtbo -@ src/user-led-overlay.dts.preprocessed
 
 install: proteus-overlay
 	install -m 0755 user-led-overlay.dtbo /boot/proteus
