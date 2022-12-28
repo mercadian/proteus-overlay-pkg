@@ -24,7 +24,7 @@
 				led_rgb_b {
 					function = LED_FUNCTION_STATUS;
 					color = <LED_COLOR_ID_RED>;
-					gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_HIGH>; // GPIO3_A4, which is pin 16 (GPIO 100)
+					gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>; // GPIO4_B3, which is pin 3 (GPIO 139)
 					linux,default-trigger = "activity";
 				};
 
