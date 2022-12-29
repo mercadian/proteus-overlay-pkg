@@ -43,7 +43,7 @@
 		__overlay__ {
 			leds {
 				led_rgb_b: led-rgb-b {
-					rockchip,pins = <3 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+					rockchip,pins = <3 RK_PA4 RK_FUNC_GPIO &pcfg_pull_down>;
 				};
 
 				disable_old_led: disable-old-led {

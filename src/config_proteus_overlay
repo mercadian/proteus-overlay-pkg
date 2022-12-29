@@ -42,8 +42,8 @@ for (( i=0; i<$LENGTH-1; i++ )); do
         else
             echo "Adding Proteus overlay to existing line for entry $i..."
             awk "NR==$(($EXISTING_LINE_NUMBER+$OFFSET)) {\$0=\"$EXISTING_LINE $PROTEUS_OVERLAY_PATH\"} { print }" $EXTLINUX_CONF_NEW > $EXTLINUX_CONF_NEW.tmp && mv $EXTLINUX_CONF_NEW.tmp $EXTLINUX_CONF_NEW
-        fi  
-    fi 
+        fi
+    fi
 done
 
 # Update the conf file and print it

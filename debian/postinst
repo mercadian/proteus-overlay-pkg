@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p /boot/proteus
+cp /lib/proteus/user-led-overlay.dtbo /boot/proteus/user-led-overlay.dtbo
+/usr/sbin/config_proteus_overlay

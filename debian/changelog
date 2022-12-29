@@ -1,3 +1,11 @@
+proteus-overlay (1.0.0) bullseye; urgency=high
+
+  * Added support for ROCK 5B board v1.42.
+  * Changed the activity LED to pin 3 for easier access.
+  * The DTS is now designed to run throuh the cpp preprocessor, so it uses macro names instead of hardcoding variable values.
+
+ -- Mercadian Systems <info@mercadian.net>  Thu, 29 Dec 2022 01:11:58 -0500
+
 proteus-overlay (0.1.0) bullseye; urgency=high
 
   * Initial release.

@@ -10,7 +10,7 @@ override_dh_auto_build:
 	make all
 
 override_dh_auto_install:
-	install -m 0755 -D -t debian/proteus-overlay/boot/proteus user-led-overlay.dtbo
+	install -m 0755 -D -t debian/proteus-overlay/lib/proteus user-led-overlay.dtbo
 	install -m 0755 -D -t debian/proteus-overlay/usr/sbin src/config_proteus_overlay
 	install -m 0755 -D -t debian/proteus-overlay/etc/kernel/postinst.d src/zzz_config_proteus_overlay
 	install -m 0755 -D -t debian/proteus-overlay/etc/kernel/postrm.d src/zzz_config_proteus_overlay

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rm /boot/proteus/user-led-overlay.dtbo
