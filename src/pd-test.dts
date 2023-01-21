@@ -1,0 +1,25 @@
+/*
+ * Copyright (C) 2022 Mercadian Systems LLC
+ */
+ 
+/dts-v1/;
+/plugin/;
+
+#include "dt-bindings/usb/pd.h"
+
+// Overwrites the USB-PD options the board accepts
+/ {
+    fragment@0 {
+        target = <&i2c4>;
+        __overlay__ {
+            usbc0: fusb302@22 {
+                usb_con: connector {
+                    sink-pdos = <
+                        PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)       // 5v 3a by default
+                        PDO_VAR(5000, 20000, 5000)                      // Accept all voltages from 5v to 20v at 5a max
+                    >;
+                };
+            };
+        };
+    };
+};
